@@ -18,22 +18,16 @@ function MeuTitulo() {
 function Minhatabela() {
   return (
     <table>
-    <tr>
-      <td>COD</td>
-      <td>Nome</td>
-    </tr>
-    <tr>
-      <td>001</td>
-      <td>Hevellyn</td>
-    </tr>
-    <tr>
-      <td>002</td>
-      <td>Julia</td>
-    </tr>
-    <tr>
-      <td>003</td>
-      <td>Letícia</td>
-    </tr>
+      <tr>
+        <td>COD</td>
+        <td>Nome</td>
+      </tr>
+      {pessoas.map((pessoa) => (
+        <tr key={pessoa.COD}>
+          <td>{pessoa.COD}</td>
+          <td>{pessoa.Nome}</td>
+        </tr>
+      ))}
     </table>
   );
 }
