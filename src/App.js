@@ -1,60 +1,52 @@
-import logo from './logo.svg';
+import React, { useEffect, useState } from 'react';
 import './App.css';
-let nome = 'Hevellyn';
-let pessoas = [{"COD":"001","Nome":"Hevellyn"},{"COD":"002","Nome":"Julia"},{"COD":"003","Nome":"Letícia"}]
+import axios from 'axios';
 
-function MyButton() {
+function App() {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    // Make an Axios GET request to your API endpoint (in this case, localhost:9000/doador)
+    axios.get('http://localhost:9000/doador')
+      .then((response) => {
+        console.log(response.data);
+        setData(response.data);
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error);
+      });
+  }, []);
+
   return (
-    <button>I'm a button</button>
+    <div className="App">
+      <header className="App-header">
+        <MeuTitulo />
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nome</th>
+              <th>Cidade</th>
+            </tr>
+          </thead>
+          <tbody>
+            {data.map((item) => (
+              <tr key={item.id}>
+                <td>{item.id}</td>
+                <td>{item.nome}</td>
+                <td>{item.cidade}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </header>
+    </div>
   );
 }
 
 function MeuTitulo() {
   return (
     <h1>Meu Projeto</h1>
-  );
-}
-
-function Minhatabela() {
-  return (
-    <table>
-      <tr>
-        <td>COD</td>
-        <td>Nome</td>
-      </tr>
-      {pessoas.map((pessoa) => (
-        <tr key={pessoa.COD}>
-          <td>{pessoa.COD}</td>
-          <td>{pessoa.Nome}</td>
-        </tr>
-      ))}
-    </table>
-  );
-}
-
-
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <MeuTitulo/>
-        <Minhatabela/>
-        <p>
-          Edit <code>src/App.js</code> and save to reload. {nome}
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <MyButton />
-
-      </header>
-    </div>
   );
 }
 
