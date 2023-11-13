@@ -3,17 +3,28 @@ import './App.css';
 import axios from 'axios';
 
 function App() {
-  const [data, setData] = useState([]);
+  const [dataDoador, setDataDoador] = useState([]);
+  const [dataDoacao, setDataDoacao] = useState([]);
 
   useEffect(() => {
     // Make an Axios GET request to your API endpoint (in this case, localhost:9000/doador)
     axios.get('http://localhost:9000/doador')
       .then((response) => {
         console.log(response.data);
-        setData(response.data);
+        setDataDoador(response.data);
       })
       .catch((error) => {
-        console.error('Error fetching data:', error);
+        console.error('Error fetching doador data:', error);
+      });
+
+    // Make an Axios GET request to your API endpoint (in this case, localhost:9000/doacao)
+    axios.get('http://localhost:9000/doacao')
+      .then((response) => {
+        console.log(response.data);
+        setDataDoacao(response.data);
+      })
+      .catch((error) => {
+        console.error('Error fetching doacao data:', error);
       });
   }, []);
 
@@ -30,11 +41,31 @@ function App() {
             </tr>
           </thead>
           <tbody>
-            {data.map((item) => (
+            {dataDoador.map((item) => (
               <tr key={item.id}>
                 <td>{item.id}</td>
                 <td>{item.nome}</td>
                 <td>{item.cidade}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+
+        <MeuTitulo1 />
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Valor</th>
+              <th>User Sistema ID</th>
+            </tr>
+          </thead>
+          <tbody>
+            {dataDoacao.map((item) => (
+              <tr key={item.id}>
+                <td>{item.id}</td>
+                <td>{item.valor}</td>
+                <td>{item.user_sistema_id}</td>
               </tr>
             ))}
           </tbody>
@@ -46,7 +77,13 @@ function App() {
 
 function MeuTitulo() {
   return (
-    <h1>Meu Projeto</h1>
+    <h1>Doadores</h1>
+  );
+}
+
+function MeuTitulo1() {
+  return (
+    <h1>Doações</h1>
   );
 }
 
