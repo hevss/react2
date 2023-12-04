@@ -108,8 +108,8 @@ function App() {
           </label>
           <br />
           <label>
-            Cidade:
-            <input type="text" name="cidade" value={formData.cidade} onChange={handleInputChange} />
+            CPF:
+            <input type="VarChar" name="cpf" value={formData.cpf} onChange={handleInputChange} />
           </label>
           <br />
           <button type="button" onClick={submitForm}>Adicionar Doador</button>
@@ -119,7 +119,7 @@ function App() {
             <tr>
               <th>ID</th>
               <th>Nome</th>
-              <th>Cidade</th>
+              <th>CPF</th>
             </tr>
           </thead>
           <tbody>
@@ -127,7 +127,7 @@ function App() {
               <tr key={item.id}>
                 <td>{item.id}</td>
                 <td>{item.nome}</td>
-                <td>{item.cidade}</td>
+                <td>{item.cpf}</td>
               </tr>
             ))}
           </tbody>
@@ -137,7 +137,7 @@ function App() {
         <form>
           <label>
             Valor:
-            <input type="text" name="valor" value={formDataDoacao.valor} onChange={handleDoacaoInputChange} />
+            <input type="decimal" name="valor" value={formDataDoacao.valor} onChange={handleDoacaoInputChange} />
           </label>
           <br />
           <label>
